@@ -1,0 +1,18 @@
+{
+    "name": "GamePlay.Player.Item",
+    "rootNamespace": "GamePlay.Player.Item",
+    "references": [
+        "PhotonUnityNetworking",
+        "PhotonRealtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

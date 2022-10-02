@@ -19,6 +19,7 @@ namespace GamePlay.PUN
             {
                 PhotonNetwork.NickName = usernameInput.text;
                 buttonText.text = "Connecting...";
+                PhotonNetwork.AutomaticallySyncScene = true;
                 PhotonNetwork.ConnectUsingSettings();
 
             }

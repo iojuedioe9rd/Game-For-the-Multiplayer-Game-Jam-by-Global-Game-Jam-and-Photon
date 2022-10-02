@@ -2,9 +2,11 @@
     "name": "GamePlay.Matchmaking",
     "rootNamespace": "GamePlay.Matchmaking",
     "references": [
-		"GUID:57c32fc907df0f54e8e6e8f0d2488336",
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336",
         "GUID:831409e8f9d13b5479a3baef9822ad34",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"],
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:fbcb90f9e4395674fafd4b0121215720"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
