@@ -1,0 +1,155 @@
+﻿
+
+using GamePlay.JSON;
+using System;
+using UnityEngine;
+
+namespace GamePlay.HealthSystem {
+
+    /// <summary>
+    /// Health System: Damage, Heal, fires several events when data changes.
+    /// Use on Units, Buildings, Items; anything you want to have some health
+    /// Use HealthSystemComponent if you want to add a HealthSystem directly to a Game Object instead of using the C# constructor
+    /// </summary>
+    public class HealthSystem {
+
+        public event EventHandler OnHealthChanged;
+        public event EventHandler OnHealthMaxChanged;
+        public event EventHandler OnDamaged;
+        public event EventHandler OnHealed;
+        public event EventHandler OnDead;
+
+        private float healthMax;
+        private float health;
+
+        /// <summary>
+        /// Construct a HealthSystem, receives the health max and sets current health to that value
+        /// </summary>
+        public HealthSystem(float healthMax) {
+            this.healthMax = healthMax;
+            health = healthMax;
+        }
+
+        /// <summary>
+        /// Get the current health
+        /// </summary>
+        public float GetHealth() {
+            return health;
+        }
+
+        /// <summary>
+        /// Get the current max amount of health
+        /// </summary>
+        public float GetHealthMax() {
+            return healthMax;
+        }
+
+        /// <summary>
+        /// Get the current Health as a Normalized value (0-1)
+        /// </summary>
+        public float GetHealthNormalized() {
+            return health / healthMax;
+        }
+
+        /// <summary>
+        /// Deal damage to this HealthSystem
+        /// </summary>
+        public void Damage(float amount) {
+            health -= amount;
+            if (health < 0) {
+                health = 0;
+            }
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+            OnDamaged?.Invoke(this, EventArgs.Empty);
+
+            if (health <= 0) {
+                Die();
+            }
+        }
+
+        /// <summary>
+        /// Kill this HealthSystem
+        /// </summary>
+        public void Die() {
+            OnDead?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Test if this Health System is dead
+        /// </summary>
+        public bool IsDead() {
+            return health <= 0;
+        }
+
+        /// <summary>
+        /// Heal this HealthSystem
+        /// </summary>
+        public void Heal(float amount) {
+            health += amount;
+            if (health > healthMax) {
+                health = healthMax;
+            }
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+            OnHealed?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Heal this HealthSystem to the maximum health amount
+        /// </summary>
+        public void HealComplete() {
+            health = healthMax;
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+            OnHealed?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Set the Health Amount Max, optionally also set the Health Amount to the new Max
+        /// </summary>
+        public void SetHealthMax(float healthMax, bool fullHealth) {
+            this.healthMax = healthMax;
+            if (fullHealth) health = healthMax;
+            OnHealthMaxChanged?.Invoke(this, EventArgs.Empty);
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Set the current Health amount, doesn't set above healthAmountMax or below 0
+        /// </summary>
+        /// <param name="health"></param>
+        public void SetHealth(float health) {
+            if (health > healthMax) {
+                health = healthMax;
+            }
+            if (health < 0) {
+                health = 0;
+            }
+            this.health = health;
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+
+            if (health <= 0) {
+                Die();
+            }
+        }
+
+        public void SetJSON(string v)
+        {
+            JSONObject json = (JSONObject)JSON.JSON.Parse(v);
+
+            json["health"] = health;
+            json["maxHealth"] = healthMax;
+        }
+
+        public string ToJSON()
+        {
+            JSONObject json = new JSONObject();
+
+            //healthMax
+            //health
+            json.Add("health", health);
+            json.Add("maxHealth", healthMax);
+
+            return json.ToString();
+        }
+    }
+
+}

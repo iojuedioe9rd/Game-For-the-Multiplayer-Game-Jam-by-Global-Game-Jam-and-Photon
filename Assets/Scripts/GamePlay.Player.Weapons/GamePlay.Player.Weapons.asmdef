@@ -1,11 +1,9 @@
 {
-    "name": "GamePlay.Matchmaking",
-    "rootNamespace": "GamePlay.Matchmaking",
+    "name": "GamePlay.Player.Weapons",
+    "rootNamespace": "GamePlay.Player.Weapons",
     "references": [
         "PhotonUnityNetworking",
-        "PhotonRealtime",
-        "Unity.TextMeshPro",
-        "GamePlay.Player.Item"
+        "PhotonRealtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

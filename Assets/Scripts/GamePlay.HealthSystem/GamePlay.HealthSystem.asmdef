@@ -1,11 +1,10 @@
 {
-    "name": "GamePlay.Matchmaking",
-    "rootNamespace": "GamePlay.Matchmaking",
+    "name": "GamePlay.HealthSystem",
+    "rootNamespace": "GamePlay.HealthSystem",
     "references": [
         "PhotonUnityNetworking",
         "PhotonRealtime",
-        "Unity.TextMeshPro",
-        "GamePlay.Player.Item"
+        "GamePlay.JSON"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

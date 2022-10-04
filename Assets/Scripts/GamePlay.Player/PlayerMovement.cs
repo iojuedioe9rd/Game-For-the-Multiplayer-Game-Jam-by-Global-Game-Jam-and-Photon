@@ -12,6 +12,11 @@ namespace GamePlay.Player
         public PhotonView view { get; private set; }
         public Rigidbody2D rb { get; private set; }
 
+        public float moveSpeed = 5f;
+
+        Vector2 movement = Vector2.zero;
+        Vector2 mousePos = Vector2.zero;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -24,8 +29,40 @@ namespace GamePlay.Player
         {
             if(view.AmOwner)
             {
-                print("hi");
+                float horizontal = Input.GetAxisRaw("Horizontal");
+                float vertical = Input.GetAxisRaw("Vertical");
+
+                movement.x = horizontal;
+                movement.y = vertical;
+
+                print(UnityEngine.Camera.main);
+                mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
+        }
+
+        private void FixedUpdate()
+        {
+            Movement();
+            Look();
+        }
+
+        void Movement()
+        {
+            
+
+            rb.MovePosition(rb.position + (moveSpeed * Time.fixedDeltaTime * movement));
+        }
+
+        void Look()
+        {
+            if (view.AmOwner)
+            {
+                Vector2 lookDir = mousePos - rb.position;
+                float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+                rb.rotation = angle;
+            }
+
+                
         }
     }
 }
