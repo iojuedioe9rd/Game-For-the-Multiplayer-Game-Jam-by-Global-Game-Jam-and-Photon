@@ -2,9 +2,11 @@
     "name": "GamePlay.Player",
     "rootNamespace": "GamePlay.Player",
     "references": [
-		"PhotonUnityNetworking",
+        "PhotonUnityNetworking",
         "PhotonRealtime",
-        "Unity.TextMeshPro"],
+        "Unity.TextMeshPro",
+        "GamePlay.All"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

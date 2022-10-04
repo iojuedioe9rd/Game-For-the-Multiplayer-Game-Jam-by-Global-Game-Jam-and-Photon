@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GamePlay.HealthSystem;
 using Photon.Pun;
+using GamePlay.All;
 
 namespace GamePlay
 {
@@ -59,6 +60,8 @@ namespace GamePlay
             GetPlayers();
         }
 
+        float t = 5f;
+
         // Update is called once per frame
         void Update()
         {
@@ -66,6 +69,16 @@ namespace GamePlay
 
             if(Vector3.Distance(transform.position, player.position) <= 8f)
             {
+                if(Time.time >= t)
+                {
+                    t += 5f;
+                    Vector2 pos = (Vector2)player.position + (player.GetComponent<IPlayer>().GetDir() * 5);
+
+                    GameObject bullet = PhotonNetwork.Instantiate("Bullet", pos, Quaternion.identity);
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    rb.AddForce(pos * 20f, ForceMode2D.Impulse);
+                }
+                
                 return;
             }
 

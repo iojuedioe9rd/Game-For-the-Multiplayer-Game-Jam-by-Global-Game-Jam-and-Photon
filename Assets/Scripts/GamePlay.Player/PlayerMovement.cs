@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using GamePlay.All;
 
 namespace GamePlay.Player
 {
     [RequireComponent(typeof(PhotonView))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IPlayer
     {
         public PhotonView view { get; private set; }
         public Rigidbody2D rb { get; private set; }
@@ -63,6 +64,11 @@ namespace GamePlay.Player
             }
 
                 
+        }
+
+        public Vector2 GetDir()
+        {
+            return movement;
         }
     }
 }
