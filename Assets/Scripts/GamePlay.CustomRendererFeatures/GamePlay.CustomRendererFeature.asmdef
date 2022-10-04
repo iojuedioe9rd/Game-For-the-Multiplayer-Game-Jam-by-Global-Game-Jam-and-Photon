@@ -1,11 +1,8 @@
 {
-    "name": "GamePlay",
-    "rootNamespace": "GamePlay",
+    "name": "GamePlay.CustomRendererFeature",
+    "rootNamespace": "GamePlay.CustomRendererFeature",
     "references": [
-        "PhotonUnityNetworking",
-        "PhotonRealtime",
-        "GamePlay.HealthSystem",
-        "GamePlay.All"
+        "Unity.RenderPipelines.Core.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
