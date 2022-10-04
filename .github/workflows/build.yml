@@ -1,4 +1,4 @@
-	name: Build Unity
+name: Build Unity
 description: Build Unity project on Ubuntu, macOS or Windows
 inputs:
   unity-path:
